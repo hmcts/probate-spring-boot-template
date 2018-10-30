@@ -30,9 +30,6 @@ mainClassName = 'uk.gov.hmcts.probate.SpringBootTemplateApplication'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-checkstyle.toolVersion = '8.2'
-checkstyle.configFile = new File(rootDir, "checkstyle.xml")
-
 
 check.dependsOn dependencyCheckAnalyze
 // make build fail on Checkstyle issues (https://github.com/gradle/gradle/issues/881)
@@ -215,8 +212,8 @@ dependencies {
   compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
   compile group: 'org.springframework.retry', name: 'spring-retry'
 
-  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix'
-  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix-dashboard'
+  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix', version: '1.4.6.RELEASE'
+  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix-dashboard', version: '1.4.6.RELEASE'
   compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
 
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging-spring', version: versions.hmctsJavaLogging
