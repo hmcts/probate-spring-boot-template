@@ -25,14 +25,13 @@ apply plugin: "com.gorylenko.gradle-git-properties"
 
 group = 'uk.gov.hmcts.probate'
 version = "4.0.0"
-mainClassName = 'uk.gov.hmcts.probate.BusinessRulesValidationApplication'
+mainClassName = 'uk.gov.hmcts.probate.SpringBootTemplateApplication'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 checkstyle.toolVersion = '8.2'
 checkstyle.configFile = new File(rootDir, "checkstyle.xml")
-mainClassName = 'uk.gov.hmcts.probate.BusinessRulesValidationApplication'
 
 
 check.dependsOn dependencyCheckAnalyze
@@ -157,7 +156,7 @@ task caseCreator(type: Test) {
 }
 
 gitProperties {
-  gitPropertiesDir = new File("${project.rootDir}/src/main/resources/uk/gov/hmcts/probate/sol")
+  gitPropertiesDir = new File("${project.rootDir}/src/main/resources/uk/gov/hmcts/probate")
   keys = ['git.commit.id','git.commit.time']
   dateFormat = "yyyy-MM-dd'T'HH:mmZ"
   dateFormatTimeZone = "GMT"
