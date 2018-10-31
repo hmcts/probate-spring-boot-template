@@ -5,6 +5,18 @@
   server:
     port: 8555
 
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: '*'
+        base-path: /
+    endpoint:
+      health:
+        show-details: always
+
+  authorised.services: probate_backend
+
   auth.provider.service.client:
     baseUrl: http://localhost:4502
     microservice: 'probate_backend'
