@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubmitController {
 
     @RequestMapping(path = "/submit", method = RequestMethod.POST)
-    public void submitToCcd(){
+    public void submit(){
 
     }
 }

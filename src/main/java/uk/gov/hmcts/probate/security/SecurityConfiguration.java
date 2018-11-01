@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import uk.gov.hmcts.reform.auth.checker.core.RequestAuthorizer;
 import uk.gov.hmcts.reform.auth.checker.core.service.Service;
-import uk.gov.hmcts.reform.auth.checker.spring.serviceonly.AuthCheckerServiceOnlyFilter;
+import uk.gov.hmcts.reform.auth.checker.core.user.User;
+import uk.gov.hmcts.reform.auth.checker.spring.serviceanduser.AuthCheckerServiceAndUserFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -18,16 +19,17 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private AuthCheckerServiceOnlyFilter authCheckerServiceOnlyFilter;
+    private AuthCheckerServiceAndUserFilter authCheckerServiceAndUserFilter;
 
     private AuthenticationExceptionHandler authenticationExceptionHandler;
 
     @Autowired
-    public SecurityConfiguration(RequestAuthorizer<Service> serviceRequestAuthorizer,
-                                                   AuthenticationManager authenticationManager,
+    public SecurityConfiguration(RequestAuthorizer<User> userRequestAuthorizer,
+                                 RequestAuthorizer<Service> serviceRequestAuthorizer,
+                                 AuthenticationManager authenticationManager,
                                  AuthenticationExceptionHandler authenticationExceptionHandler) {
-        authCheckerServiceOnlyFilter = new AuthCheckerServiceOnlyFilter(serviceRequestAuthorizer);
-        authCheckerServiceOnlyFilter.setAuthenticationManager(authenticationManager);
+        authCheckerServiceAndUserFilter = new AuthCheckerServiceAndUserFilter(serviceRequestAuthorizer, userRequestAuthorizer);
+        authCheckerServiceAndUserFilter.setAuthenticationManager(authenticationManager);
         this.authenticationExceptionHandler = authenticationExceptionHandler;
     }
 
@@ -44,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilter(authCheckerServiceOnlyFilter)
+        http.addFilter(authCheckerServiceAndUserFilter)
                 .sessionManagement().sessionCreationPolicy(STATELESS).and()
                 .csrf().disable()
                 .formLogin().disable()
