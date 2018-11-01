@@ -9,11 +9,12 @@
     endpoints:
       web:
         exposure:
-          include: '*'
+          include: health,info
         base-path: /
     endpoint:
       health:
         show-details: always
+        enabled: true
 
   authorised.services: probate_backend
 
