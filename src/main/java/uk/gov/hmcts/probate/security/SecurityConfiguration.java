@@ -1,13 +1,12 @@
 package uk.gov.hmcts.probate.security;
 
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import uk.gov.hmcts.reform.auth.checker.core.RequestAuthorizer;
-import uk.gov.hmcts.reform.auth.checker.core.service.Service;
 import uk.gov.hmcts.reform.auth.checker.spring.serviceonly.AuthCheckerServiceOnlyFilter;
 
 
@@ -15,14 +14,12 @@ import uk.gov.hmcts.reform.auth.checker.spring.serviceonly.AuthCheckerServiceOnl
 @ConditionalOnProperty(name = "s2s.enabled", havingValue = "true", matchIfMissing = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final AuthCheckerServiceOnlyFilter filter;
+    private final AuthCheckerServiceOnlyFilter authCheckerServiceOnlyFilter;
     private final AuthenticationExceptionHandler authenticationExceptionHandler;
 
-    public SecurityConfiguration(RequestAuthorizer<Service> serviceRequestAuthorizer,
-                                 AuthenticationManager authenticationManager,
+    public SecurityConfiguration(AuthCheckerServiceOnlyFilter authCheckerServiceOnlyFilter,
                                  AuthenticationExceptionHandler authenticationExceptionHandler) {
-        filter =  new AuthCheckerServiceOnlyFilter(serviceRequestAuthorizer);
-        filter.setAuthenticationManager(authenticationManager);
+        this.authCheckerServiceOnlyFilter = authCheckerServiceOnlyFilter;
         this.authenticationExceptionHandler = authenticationExceptionHandler;
     }
 
@@ -31,22 +28,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         final ProviderManager authenticationManager = (ProviderManager) authenticationManager();
         authenticationManager.setEraseCredentialsAfterAuthentication(false);
-        filter.setAuthenticationManager(authenticationManager());
+        authCheckerServiceOnlyFilter.setAuthenticationManager(authenticationManager());
 
-        http.exceptionHandling()
-            .authenticationEntryPoint(authenticationExceptionHandler);
+//        http.exceptionHandling()
+//            .authenticationEntryPoint(authenticationExceptionHandler);
 
-        http.addFilter(filter)
+        http.addFilter(authCheckerServiceOnlyFilter)
             .csrf().disable()
             .formLogin().disable()
             .logout().disable()
             .authorizeRequests()
-            .antMatchers("/health").permitAll()
-            .antMatchers("/info").permitAll()
-            .antMatchers("/swagger-ui.html").permitAll()
-            .antMatchers("/swagger-resources/**").permitAll()
-            .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
-            .antMatchers("/v2/api-docs").permitAll()
-            .anyRequest().authenticated();
+                .requestMatchers(EndpointRequest.to("health", "info")).permitAll()
+
+
+                .anyRequest()
+            .authenticated();
     }
+
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers("/swagger-ui.html",
+//                "/webjars/springfox-swagger-ui/**",
+//                "/swagger-resources/**",
+//                "/v2/**",
+//                "/health",
+//                "/info");
+//    }
 }
+
