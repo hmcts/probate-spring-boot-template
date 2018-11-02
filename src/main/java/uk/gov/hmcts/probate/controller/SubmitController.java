@@ -14,7 +14,7 @@ import uk.gov.hmcts.probate.service.SubmitService;
 @RestController
 public class SubmitController {
 
-    static final String SUBMIT_URL = "/submit";
+    private static final String SUBMIT_URL = "/submit";
 
     private final SubmitService submitService;
 

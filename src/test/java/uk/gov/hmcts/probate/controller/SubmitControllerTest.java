@@ -3,15 +3,10 @@ package uk.gov.hmcts.probate.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.probate.domain.FormData;
@@ -34,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = SubmitController.class, secure = false)
 public class SubmitControllerTest {
 
+    private static final String SUBMIT_URL = "/submit";
     private static final String APPLICANT_FIRST_NAME = "Rob";
     private static final String APPLICANT_LAST_NAME = "Stark";
     private static final String APPLICANT_ADDRESS = "Winterfell, Westeros";
@@ -63,7 +59,7 @@ public class SubmitControllerTest {
         when(formDataMapper.toFormData(formDataDTO)).thenReturn(formData);
         when(submitService.submit(formData)).thenReturn(new CcdCaseDataDTO());
         
-        mockMvc.perform(post(SubmitController.SUBMIT_URL)
+        mockMvc.perform(post(SUBMIT_URL)
                 .content(objectMapper.writeValueAsString(formDataDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
