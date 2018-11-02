@@ -31,10 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc(secure = false)
-@AutoConfigureWebMvc
-@ContextConfiguration(classes = ControllerConfiguration.class)
+@WebMvcTest(value = SubmitController.class, secure = false)
 public class SubmitControllerTest {
 
     private static final String APPLICANT_FIRST_NAME = "Rob";
