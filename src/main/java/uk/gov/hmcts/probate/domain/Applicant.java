@@ -10,4 +10,6 @@ public class Applicant {
     private String lastName;
 
     private String address;
+
+    private Declaration declaration;
 }

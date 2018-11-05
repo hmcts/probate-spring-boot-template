@@ -6,4 +6,5 @@ import lombok.Data;
 public class CcdCaseDataDTO {
 
     private String caseId;
+
 }

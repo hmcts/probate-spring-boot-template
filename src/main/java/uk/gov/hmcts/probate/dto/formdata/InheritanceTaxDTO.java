@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate.dto;
+package uk.gov.hmcts.probate.dto.formdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;

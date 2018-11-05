@@ -213,6 +213,7 @@ dependencies {
 
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: versions.springCloudStarterNetflixHystrix
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: versions.springCloudStarterNetflixHystrix
+  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: versions.springCloudStarterNetflixHystrix
   compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
 
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging-spring', version: versions.hmctsJavaLogging

@@ -7,10 +7,10 @@ import uk.gov.hmcts.probate.domain.Applicant;
 import uk.gov.hmcts.probate.domain.Deceased;
 import uk.gov.hmcts.probate.domain.FormData;
 import uk.gov.hmcts.probate.domain.InheritanceTax;
-import uk.gov.hmcts.probate.dto.ApplicantDTO;
-import uk.gov.hmcts.probate.dto.DeceasedDTO;
-import uk.gov.hmcts.probate.dto.FormDataDTO;
-import uk.gov.hmcts.probate.dto.InheritanceTaxDTO;
+import uk.gov.hmcts.probate.dto.formdata.ApplicantDTO;
+import uk.gov.hmcts.probate.dto.formdata.DeceasedDTO;
+import uk.gov.hmcts.probate.dto.formdata.FormDataDTO;
+import uk.gov.hmcts.probate.dto.formdata.InheritanceTaxDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -86,7 +86,7 @@ public class FormDataMapperTest {
 
     @Test
     public void shouldMapFormDataDtoToFormData() {
-        FormData actualFormData = formDataMapper.toFormData(formDataDTO);
+        FormData actualFormData = formDataMapper.mapFormDataDTO(formDataDTO);
 
         assertThat(actualFormData, is(equalTo(formData)));
     }

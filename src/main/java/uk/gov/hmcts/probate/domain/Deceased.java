@@ -10,4 +10,6 @@ public class Deceased {
     private LocalDate dateOfBirth;
 
     private LocalDate dateOfDeath;
+
+    private String domicile;
 }

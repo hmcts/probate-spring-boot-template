@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate.dto;
+package uk.gov.hmcts.probate.dto.formdata;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Builder;
@@ -23,4 +23,6 @@ public class ApplicantDTO implements Serializable {
     @NotBlank
     @Size(min = 2, message = "fieldMinSize")
     private String address;
+
+    private DeclarationDTO declaration;
 }

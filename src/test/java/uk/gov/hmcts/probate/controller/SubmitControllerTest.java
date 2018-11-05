@@ -10,11 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.probate.domain.FormData;
-import uk.gov.hmcts.probate.dto.ApplicantDTO;
+import uk.gov.hmcts.probate.dto.formdata.ApplicantDTO;
 import uk.gov.hmcts.probate.dto.CcdCaseDataDTO;
-import uk.gov.hmcts.probate.dto.DeceasedDTO;
-import uk.gov.hmcts.probate.dto.FormDataDTO;
-import uk.gov.hmcts.probate.dto.InheritanceTaxDTO;
+import uk.gov.hmcts.probate.dto.formdata.DeceasedDTO;
+import uk.gov.hmcts.probate.dto.formdata.FormDataDTO;
+import uk.gov.hmcts.probate.dto.formdata.InheritanceTaxDTO;
 import uk.gov.hmcts.probate.mapper.FormDataMapper;
 import uk.gov.hmcts.probate.service.SubmitService;
 
@@ -56,7 +56,7 @@ public class SubmitControllerTest {
         FormDataDTO formDataDTO = createFormDataDTO();
         FormData formData = new FormData();
 
-        when(formDataMapper.toFormData(formDataDTO)).thenReturn(formData);
+        when(formDataMapper.mapFormDataDTO(formDataDTO)).thenReturn(formData);
         when(submitService.submit(formData)).thenReturn(new CcdCaseDataDTO());
         
         mockMvc.perform(post(SUBMIT_URL)
