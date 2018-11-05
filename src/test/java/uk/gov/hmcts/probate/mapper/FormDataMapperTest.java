@@ -3,6 +3,7 @@ package uk.gov.hmcts.probate.mapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
+import uk.gov.hmcts.probate.controller.mapper.FormDataMapper;
 import uk.gov.hmcts.probate.domain.Applicant;
 import uk.gov.hmcts.probate.domain.Deceased;
 import uk.gov.hmcts.probate.domain.FormData;

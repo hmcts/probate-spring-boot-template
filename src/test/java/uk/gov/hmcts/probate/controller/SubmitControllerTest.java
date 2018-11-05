@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.probate.domain.FormData;
 import uk.gov.hmcts.probate.dto.formdata.ApplicantDTO;
-import uk.gov.hmcts.probate.dto.CcdCaseDataDTO;
+import uk.gov.hmcts.probate.dto.CaseInfoDTO;
 import uk.gov.hmcts.probate.dto.formdata.DeceasedDTO;
 import uk.gov.hmcts.probate.dto.formdata.FormDataDTO;
 import uk.gov.hmcts.probate.dto.formdata.InheritanceTaxDTO;
-import uk.gov.hmcts.probate.mapper.FormDataMapper;
+import uk.gov.hmcts.probate.controller.mapper.FormDataMapper;
 import uk.gov.hmcts.probate.service.SubmitService;
 
 import java.math.BigDecimal;
@@ -57,12 +57,12 @@ public class SubmitControllerTest {
         FormData formData = new FormData();
 
         when(formDataMapper.mapFormDataDTO(formDataDTO)).thenReturn(formData);
-        when(submitService.submit(formData)).thenReturn(new CcdCaseDataDTO());
+        when(submitService.submit(formData)).thenReturn(new CaseInfoDTO());
         
         mockMvc.perform(post(SUBMIT_URL)
                 .content(objectMapper.writeValueAsString(formDataDTO))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     private FormDataDTO createFormDataDTO() {

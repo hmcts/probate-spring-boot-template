@@ -11,6 +11,12 @@ import java.time.LocalDate;
 public class DeceasedDTO implements Serializable {
 
     @NotNull
+    private String firstName;
+
+    @NotNull
+    private String lastName;
+
+    @NotNull
     @JsonProperty("dob_date")
     private LocalDate dateOfBirth;
 
@@ -20,4 +26,8 @@ public class DeceasedDTO implements Serializable {
 
     @NotNull
     private String domicile;
+
+    @NotNull
+    private String address;
+
 }

@@ -10,4 +10,6 @@ public class FormData {
     private Deceased deceased;
 
     private InheritanceTax iht;
+
+    private String softStop;
 }

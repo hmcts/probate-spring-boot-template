@@ -18,4 +18,6 @@ public class FormDataDTO implements Serializable {
 
     @Valid
     private InheritanceTaxDTO iht;
+
+    private String softStop;
 }

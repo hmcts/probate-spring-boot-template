@@ -5,12 +5,9 @@ import uk.gov.hmcts.probate.dto.ccd.data.legalstatement.LegalStatementDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class DataDTO {
-
-    private String applicationId;
 
     private LocalDate applicationSubmittedDate;
 
@@ -38,9 +35,7 @@ public class DataDTO {
 
     private Long willNumberOfCodicils;
 
-    private String deceasedMarriedAfterWillOrCodicilDate;
 
-    private String deceasedForenames;
 
     private Long numberOfApplicants;
 
@@ -70,11 +65,15 @@ public class DataDTO {
 
     private String willLatestCodicilHasDate;
 
+    private String deceasedMarriedAfterWillOrCodicilDate;
+
+    private String deceasedForenames;
+
     private String deceasedSurname;
 
-    private LocalDate deceasedDateOfDeath;
+    private String deceasedDateOfDeath;
 
-    private LocalDate deceasedDateOfBirth;
+    private String deceasedDateOfBirth;
 
     private BigDecimal totalFee;
 
@@ -82,11 +81,11 @@ public class DataDTO {
 
     private BigDecimal ihtNetValue;
 
-    private List<CollectionMemberDTO<AdditionalExecutorDTO>> executorsApplyingForLegalStatement;
-
-    private List<CollectionMemberDTO<AdditionalExecutorDTO>> executorsNotApplyingForLegalStatement;
-
-    private List<CollectionMemberDTO<AliasNameDTO>> deceasedAliasNameList;
+//    private List<CollectionMemberDTO<AdditionalExecutorDTO>> executorsApplyingForLegalStatement;
+//
+//    private List<CollectionMemberDTO<AdditionalExecutorDTO>> executorsNotApplyingForLegalStatement;
+//
+//    private List<CollectionMemberDTO<AliasNameDTO>> deceasedAliasNameList;
 
     private DeclarationDTO declaration;
 
@@ -94,5 +93,5 @@ public class DataDTO {
 
     private AddressDTO deceasedAddress;
 
-    private String primaryApplicantAddress;
+    private AddressDTO primaryApplicantAddress;
 }

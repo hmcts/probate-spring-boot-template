@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.hmcts.probate.dto.CcdCaseDataDTO;
+import uk.gov.hmcts.probate.dto.CaseInfoDTO;
 import uk.gov.hmcts.probate.dto.formdata.FormDataDTO;
-import uk.gov.hmcts.probate.mapper.FormDataMapper;
+import uk.gov.hmcts.probate.controller.mapper.FormDataMapper;
 import uk.gov.hmcts.probate.service.SubmitService;
 
 @Api(tags = {"SubmitController"})
@@ -45,8 +45,8 @@ public class SubmitController {
     })
     @RequestMapping(path = SUBMIT_URL, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<CcdCaseDataDTO> submit(@RequestBody FormDataDTO formDataDTO) {
-        CcdCaseDataDTO ccdCaseDataDTO = submitService.submit(formDataMapper.mapFormDataDTO(formDataDTO));
-        return new ResponseEntity<>(ccdCaseDataDTO, HttpStatus.CREATED);
+    public ResponseEntity<CaseInfoDTO> submit(@RequestBody FormDataDTO formDataDTO) {
+        CaseInfoDTO caseInfoDTO = submitService.submit(formDataMapper.mapFormDataDTO(formDataDTO));
+        return new ResponseEntity<>(caseInfoDTO, HttpStatus.CREATED);
     }
 }
